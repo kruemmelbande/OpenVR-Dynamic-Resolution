@@ -292,7 +292,7 @@ int main(int argc, char *argv[])
 
 		// Adjust the CPU time off GPU reprojection.
 		float realCpuTime = cpuTime;
-		cpuTime *= min(frameShown, floor(gpuTime / targetFrametime) + 1);
+		cpuTime *= std::min((double)frameShown, floor(gpuTime / targetFrametime) + 1);
 
 		// Calculate average GPU frametime
 		gpuTimes.push_front(gpuTime);
@@ -363,7 +363,7 @@ int main(int argc, char *argv[])
 					else if (vramOnlyMode && newRes < initialRes && vramUsage < vramTarget)
 					{
 						// When in VRAM-only mode, make sure the res goes back up when possible.
-						newRes = min(initialRes, newRes + resIncreaseMin);
+						newRes = std::min(initialRes, newRes + resIncreaseMin);
 					}
 
 					// Clamp the new resolution
